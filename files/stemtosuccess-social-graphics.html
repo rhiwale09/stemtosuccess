@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEM to Success — Social Media Graphics</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root { --orange:#ff5c00; --yellow:#ffd000; --black:#0a0a0a; --white:#f5f2eb; --blue:#0033ff; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:#161616;color:var(--white);font-family:'DM Sans',sans-serif;padding:2rem;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.08em;margin-bottom:.4rem;}
+h1 span{color:var(--orange);}
+.subtitle{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;opacity:.45;margin-bottom:3rem;}
+.section-head{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin:3rem 0 1.5rem;padding-bottom:.5rem;border-bottom:1px solid rgba(255,255,255,.08);}
+.grid{display:flex;flex-wrap:wrap;gap:1.5rem;margin-bottom:2rem;}
+.card-wrap{display:flex;flex-direction:column;gap:.6rem;}
+.card-label{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;opacity:.4;}
+.tip{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;opacity:.3;margin-top:.3rem;}
+
+/* ===== INSTAGRAM POST 1:1 (1080×1080) ===== */
+.ig-post{width:400px;height:400px;position:relative;overflow:hidden;flex-shrink:0;}
+
+.ig1{background:var(--black);}
+.ig1-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 70% 30%,rgba(255,92,0,.35) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 20% 80%,rgba(0,51,255,.2) 0%,transparent 55%);}
+.ig1-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px;}
+.ig1-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:2.5rem;}
+.ig1-tag{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem;display:flex;align-items:center;gap:.7rem;}
+.ig1-tag::before{content:'';display:block;width:24px;height:1.5px;background:var(--orange);}
+.ig1-headline{font-family:'Bebas Neue',sans-serif;font-size:3.8rem;line-height:.9;margin-bottom:1rem;}
+.ig1-headline .acc{color:var(--orange);}
+.ig1-logo{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.1em;opacity:.5;}
+.ig1-logo span{color:var(--orange);opacity:1;}
+
+.ig2{background:var(--orange);}
+.ig2-content{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2.5rem;position:relative;}
+.ig2-num{font-family:'Bebas Neue',sans-serif;font-size:7rem;line-height:1;color:var(--black);margin-bottom:.3rem;}
+.ig2-label{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--black);opacity:.7;margin-bottom:1.5rem;}
+.ig2-desc{font-size:1rem;color:var(--black);opacity:.8;max-width:240px;line-height:1.55;font-weight:300;}
+.ig2-logo{position:absolute;bottom:1.5rem;right:1.5rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--black);opacity:.5;letter-spacing:.1em;}
+
+.ig3{background:var(--black);}
+.ig3-content{height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:2rem;}
+.ig3-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.ig3-icon{font-size:3rem;}
+.ig3-badge{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);border:1px solid rgba(255,92,0,.4);padding:.3rem .7rem;}
+.ig3-body{}
+.ig3-title{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;line-height:1;margin-bottom:.8rem;}
+.ig3-title .acc{color:var(--orange);}
+.ig3-desc{font-size:.85rem;opacity:.6;line-height:1.6;font-weight:300;margin-bottom:1.5rem;}
+.ig3-cta{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);}
+.ig3-logo{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.1em;opacity:.4;}
+.ig3-logo span{color:var(--orange);opacity:1;}
+
+/* INSTAGRAM STORY (9:16 ratio, displayed smaller) */
+.story{width:220px;height:390px;position:relative;overflow:hidden;flex-shrink:0;}
+
+.s1{background:var(--black);}
+.s1-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 20%,rgba(255,92,0,.3) 0%,transparent 55%);}
+.s1-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:28px 28px;}
+.s1-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:1.8rem 1.5rem;}
+.s1-tag{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:.8rem;}
+.s1-headline{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;line-height:.9;margin-bottom:1.2rem;}
+.s1-headline .acc{color:var(--orange);}
+.s1-btn{background:var(--orange);color:var(--black);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.2rem;display:inline-block;margin-bottom:.8rem;}
+.s1-logo{font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.1em;opacity:.5;}
+.s1-logo span{color:var(--orange);opacity:1;}
+
+.s2{background:var(--orange);}
+.s2-content{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem 1.5rem;gap:1.2rem;}
+.s2-icon{font-size:4rem;}
+.s2-title{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;line-height:.95;color:var(--black);}
+.s2-desc{font-size:.82rem;color:var(--black);opacity:.75;line-height:1.55;font-weight:300;}
+.s2-btn{background:var(--black);color:var(--white);font-family:'Space Mono',monospace;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.3rem;}
+.s2-logo{font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.1em;color:var(--black);opacity:.5;}
+
+/* FACEBOOK COVER (820×312 displayed at 820×312, scaled) */
+.fb-cover{width:700px;height:266px;position:relative;overflow:hidden;flex-shrink:0;}
+.fb1{background:var(--black);}
+.fb1-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 85% 50%,rgba(255,92,0,.25) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 10% 30%,rgba(0,51,255,.15) 0%,transparent 55%);}
+.fb1-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:40px 40px;}
+.fb1-content{position:relative;z-index:2;height:100%;display:flex;align-items:center;padding:2.5rem 3rem;gap:3rem;}
+.fb1-left{}
+.fb1-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.1em;margin-bottom:.4rem;}
+.fb1-logo span{color:var(--orange);}
+.fb1-tagline{font-size:.82rem;opacity:.5;font-weight:300;max-width:220px;line-height:1.55;}
+.fb1-divider{width:1px;height:100px;background:rgba(255,255,255,.1);}
+.fb1-headline{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:.95;}
+.fb1-headline .acc{color:var(--orange);}
+.fb1-right-bottom{position:absolute;bottom:1.5rem;right:2.5rem;}
+.fb1-badge{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);border:1px solid rgba(255,92,0,.3);padding:.3rem .8rem;}
+
+/* TWITTER/X CARD */
+.tw-card{width:560px;height:280px;position:relative;overflow:hidden;flex-shrink:0;}
+.tw1{background:var(--black);}
+.tw1-accent{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--orange);}
+.tw1-content{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;padding:2.5rem 2.5rem 2.5rem 3rem;}
+.tw1-tag{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:.8rem;}
+.tw1-headline{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1;margin-bottom:.8rem;}
+.tw1-desc{font-size:.85rem;opacity:.6;line-height:1.6;font-weight:300;max-width:380px;margin-bottom:1.2rem;}
+.tw1-footer{display:flex;justify-content:space-between;align-items:center;}
+.tw1-hashtags{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--orange);}
+.tw1-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;opacity:.5;}
+.tw1-logo span{color:var(--orange);opacity:1;}
+.tw1-bg{position:absolute;right:0;top:0;bottom:0;width:160px;background:radial-gradient(ellipse at right,rgba(255,92,0,.15) 0%,transparent 70%);}
+
+/* LINKEDIN BANNER */
+.li-banner{width:700px;height:175px;position:relative;overflow:hidden;flex-shrink:0;}
+.li1{background:var(--black);}
+.li1-bg{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,92,0,.12) 0%,transparent 50%),radial-gradient(ellipse at 90% 50%,rgba(0,51,255,.15) 0%,transparent 60%);}
+.li1-content{position:relative;z-index:2;height:100%;display:flex;align-items:center;justify-content:space-between;padding:2rem 3rem;}
+.li1-left{display:flex;flex-direction:column;gap:.4rem;}
+.li1-logo{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.08em;}
+.li1-logo span{color:var(--orange);}
+.li1-title{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);}
+.li1-desc{font-size:.8rem;opacity:.5;font-weight:300;max-width:280px;line-height:1.5;}
+.li1-stats{display:flex;gap:2.5rem;}
+.li1-stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--orange);line-height:1;}
+.li1-stat-label{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;opacity:.45;margin-top:.1rem;}
+</style>
+</head>
+<body>
+
+<h1>STEM<span>2</span>SUCCESS — Social Media Graphics</h1>
+<p class="subtitle">Right-click any graphic → "Save image as" · Or screenshot to save · Customize text as needed</p>
+
+<!-- INSTAGRAM POSTS -->
+<div class="section-head">Instagram Posts (1080 × 1080) — Display at 400px</div>
+<div class="grid">
+
+  <!-- Post 1: Hero Brand -->
+  <div class="card-wrap">
+    <div class="ig-post ig1">
+      <div class="ig1-bg"></div>
+      <div class="ig1-grid"></div>
+      <div class="ig1-content">
+        <div class="ig1-tag">Houston, TX · Nonprofit</div>
+        <div class="ig1-headline">UNLOCK<br>YOUR <span class="acc">STEM</span><br>FUTURE.</div>
+        <div class="ig1-logo">STEM<span>2</span>SUCCESS</div>
+      </div>
+    </div>
+    <span class="card-label">Brand Post</span>
+    <span class="tip">Use for profile intro & announcements</span>
+  </div>
+
+  <!-- Post 2: Stat -->
+  <div class="card-wrap">
+    <div class="ig-post ig2">
+      <div class="ig2-content">
+        <div class="ig2-num">500+</div>
+        <div class="ig2-label">Students & Counting</div>
+        <div class="ig2-desc">We're changing lives one STEM lesson at a time. Join the movement.</div>
+        <div class="ig2-logo">STEM2SUCCESS</div>
+      </div>
+    </div>
+    <span class="card-label">Impact Stat</span>
+    <span class="tip">Swap number for any milestone</span>
+  </div>
+
+  <!-- Post 3: Program Feature -->
+  <div class="card-wrap">
+    <div class="ig-post ig3">
+      <div class="ig3-content">
+        <div class="ig3-top">
+          <span class="ig3-icon">🚀</span>
+          <span class="ig3-badge">Now Enrolling</span>
+        </div>
+        <div class="ig3-body">
+          <div class="ig3-title"><span class="acc">STEM</span><br>MENTORSHIP<br>PROGRAM</div>
+          <div class="ig3-desc">Get paired with a STEM professional. Build your future. Applications open now — link in bio.</div>
+          <div class="ig3-cta">Apply Today →</div>
+        </div>
+        <div class="ig3-logo">STEM<span>2</span>SUCCESS</div>
+      </div>
+    </div>
+    <span class="card-label">Program Feature</span>
+    <span class="tip">Change emoji + title for each program</span>
+  </div>
+
+</div>
+
+<!-- INSTAGRAM STORIES -->
+<div class="section-head">Instagram / Facebook Stories (1080 × 1920) — Display at 220px</div>
+<div class="grid">
+
+  <div class="card-wrap">
+    <div class="story s1">
+      <div class="s1-bg"></div>
+      <div class="s1-grid"></div>
+      <div class="s1-content">
+        <div class="s1-tag">Nonprofit · Houston TX</div>
+        <div class="s1-headline">STEM<br>CHANGES<br><span class="acc">LIVES.</span></div>
+        <div class="s1-btn">Learn More ↓</div>
+        <div class="s1-logo">STEM<span>2</span>SUCCESS</div>
+      </div>
+    </div>
+    <span class="card-label">Brand Story</span>
+    <span class="tip">Add swipe-up link to website</span>
+  </div>
+
+  <div class="card-wrap">
+    <div class="story s2">
+      <div class="s2-content">
+        <span class="s2-icon">🔬</span>
+        <div class="s2-title">WORKSHOPS NOW OPEN</div>
+        <div class="s2-desc">Hands-on STEM workshops for K–12 students. Free to attend. Limited seats — sign up fast!</div>
+        <div class="s2-btn">Register Now →</div>
+        <div class="s2-logo">STEM2SUCCESS</div>
+      </div>
+    </div>
+    <span class="card-label">Event Story</span>
+    <span class="tip">Update text for each event</span>
+  </div>
+
+  <div class="card-wrap">
+    <div class="story" style="background:var(--black);flex-shrink:0;width:220px;height:390px;position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(255,208,0,.25) 0%,transparent 60%);"></div>
+      <div style="position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem 1.5rem;gap:1rem;">
+        <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--yellow);">Support Us</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:.95;">DONATE &amp; CHANGE A LIFE</div>
+        <div style="font-size:.78rem;opacity:.55;line-height:1.55;font-weight:300;">Every $50 funds one tutoring session. Every dollar counts.</div>
+        <div style="background:var(--yellow);color:var(--black);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.4rem;">Donate Now →</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.1em;opacity:.4;margin-top:.5rem;">STEM<span style="color:var(--orange);opacity:1;">2</span>SUCCESS</div>
+      </div>
+    </div>
+    <span class="card-label">Donation Story</span>
+    <span class="tip">Yellow variant — stands out in feed</span>
+  </div>
+
+</div>
+
+<!-- FACEBOOK COVER -->
+<div class="section-head">Facebook / LinkedIn Cover (820 × 312) — Display at 700px</div>
+<div class="grid">
+  <div class="card-wrap">
+    <div class="fb-cover fb1">
+      <div class="fb1-bg"></div>
+      <div class="fb1-grid"></div>
+      <div class="fb1-content">
+        <div class="fb1-left">
+          <div class="fb1-logo">STEM<span>2</span>SUCCESS</div>
+          <div class="fb1-tagline">Tutoring · Mentorship · Scholarships · Workshops · Houston, TX</div>
+        </div>
+        <div class="fb1-divider"></div>
+        <div>
+          <div class="fb1-headline">UNLOCK<br><span class="acc">EVERY KID'S</span><br>POTENTIAL.</div>
+        </div>
+      </div>
+      <div class="fb1-right-bottom"><div class="fb1-badge">501(c)(3) Nonprofit · stemtosuccess.org</div></div>
+    </div>
+    <span class="card-label">Facebook / Page Cover Photo</span>
+    <span class="tip">Also works for LinkedIn company page banner</span>
+  </div>
+</div>
+
+<!-- TWITTER CARD -->
+<div class="section-head">Twitter / X Banner (1500 × 500) — Display at 560px</div>
+<div class="grid">
+  <div class="card-wrap">
+    <div class="tw-card tw1">
+      <div class="tw1-bg"></div>
+      <div class="tw1-accent"></div>
+      <div class="tw1-content">
+        <div class="tw1-tag">Houston Nonprofit · Est. 2025</div>
+        <div class="tw1-headline">STEM TO SUCCESS</div>
+        <div class="tw1-desc">Unlocking science, technology, engineering & math for every kid in Houston — through tutoring, mentorship, and scholarships.</div>
+        <div class="tw1-footer">
+          <div class="tw1-hashtags">#STEMtoSuccess #HoustonNonprofit #STEMEducation</div>
+          <div class="tw1-logo">STEM<span>2</span>SUCCESS</div>
+        </div>
+      </div>
+    </div>
+    <span class="card-label">Twitter / X Banner</span>
+  </div>
+</div>
+
+<!-- LINKEDIN BANNER -->
+<div class="section-head">LinkedIn Personal Banner (1584 × 396) — Display at 700px</div>
+<div class="grid">
+  <div class="card-wrap">
+    <div class="li-banner li1">
+      <div class="li1-bg"></div>
+      <div style="position:relative;z-index:2;height:100%;display:flex;align-items:center;justify-content:space-between;padding:2rem 3rem;">
+        <div>
+          <div class="li1-logo">STEM<span>2</span>SUCCESS</div>
+          <div class="li1-title" style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin:.3rem 0;">Founder · Houston Nonprofit</div>
+          <div style="font-size:.78rem;opacity:.45;font-weight:300;max-width:260px;line-height:1.5;">Unlocking STEM opportunity for underrepresented students through tutoring, mentorship & scholarships.</div>
+        </div>
+        <div style="display:flex;gap:2.5rem;">
+          <div style="text-align:center;">
+            <div class="li1-stat-num" style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--orange);line-height:1;">500+</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;opacity:.4;margin-top:.1rem;">Students</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="li1-stat-num" style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--orange);line-height:1;">$120K</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;opacity:.4;margin-top:.1rem;">Scholarships</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="li1-stat-num" style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--orange);line-height:1;">40+</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;opacity:.4;margin-top:.1rem;">Mentors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="card-label">LinkedIn Personal / Company Banner</span>
+    <span class="tip">Perfect for both your personal page and the org page</span>
+  </div>
+</div>
+
+<div style="margin-top:3rem;padding:1.5rem;border:1px solid rgba(255,255,255,.08);font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.08em;line-height:2;opacity:.4;">
+  💡 HOW TO USE: Screenshot each graphic at full zoom for best quality · Use browser zoom 100% for correct proportions · Replace placeholder stats with real numbers · Update colors in the CSS :root variables to rebrand · All fonts load from Google Fonts
+</div>
+
+</body>
+</html>

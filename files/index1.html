@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEM to Success — Unlocking STEM For Every Kid</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0a0a;
+  --white: #f5f2eb;
+  --orange: #ff5c00;
+  --yellow: #ffd000;
+  --blue: #0033ff;
+  --gray: #111111;
+  --gray2: #1a1a1a;
+  --mid: #3a3a3a;
+  --border: rgba(255,255,255,0.07);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; cursor: none; }
+
+/* CURSOR */
+.cursor { width: 12px; height: 12px; background: var(--orange); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s, height .2s, background .2s, transform .15s; }
+.cursor-ring { width: 38px; height: 38px; border: 1.5px solid var(--orange); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: .5; transition: width .3s, height .3s, border-color .3s; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 200; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 4rem; background: rgba(10,10,10,.9); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: .08em; color: var(--white); text-decoration: none; }
+.nav-logo span { color: var(--orange); }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { color: var(--white); text-decoration: none; font-family: 'Space Mono', monospace; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; opacity: .6; transition: opacity .2s, color .2s; }
+.nav-links a:hover { opacity: 1; color: var(--orange); }
+.nav-cta { background: var(--orange) !important; color: var(--black) !important; opacity: 1 !important; padding: .55rem 1.3rem; font-weight: 700 !important; transition: background .2s !important; }
+.nav-cta:hover { background: var(--yellow) !important; }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 4rem 5rem; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 55% 55% at 78% 38%, rgba(255,92,0,.2) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 20% 72%, rgba(0,51,255,.12) 0%, transparent 55%), var(--black); }
+.hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 60px 60px; animation: gridScroll 25s linear infinite; }
+@keyframes gridScroll { to { background-position: 60px 60px; } }
+.hero-tag { font-family: 'Space Mono', monospace; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.5rem; position: relative; z-index: 2; display: flex; align-items: center; gap: 1rem; animation: fadeUp 1s .1s both; }
+.hero-tag::before { content: ''; display: block; width: 36px; height: 2px; background: var(--orange); }
+.hero-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4.5rem, 12vw, 12rem); line-height: .88; position: relative; z-index: 2; animation: fadeUp 1s .15s both; }
+.hero-headline .acc { color: var(--orange); }
+.hero-headline .str { -webkit-text-stroke: 2px var(--white); color: transparent; }
+.hero-sub { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: flex-end; margin-top: 2.5rem; animation: fadeUp 1s .25s both; }
+.hero-desc { font-size: 1rem; line-height: 1.75; max-width: 400px; opacity: .65; font-weight: 300; }
+.hero-btns { display: flex; gap: 1rem; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+/* BUTTONS */
+.btn-primary { background: var(--orange); color: var(--black); font-family: 'Space Mono', monospace; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .95rem 2rem; text-decoration: none; display: inline-block; transition: background .2s, transform .2s; clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px)); }
+.btn-primary:hover { background: var(--yellow); transform: translateY(-2px); }
+.btn-ghost { border: 1px solid rgba(255,255,255,.25); color: var(--white); font-family: 'Space Mono', monospace; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; padding: .95rem 1.8rem; text-decoration: none; display: inline-block; transition: border-color .2s, color .2s; }
+.btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+
+/* MARQUEE */
+.marquee-wrap { background: var(--orange); padding: .85rem 0; overflow: hidden; white-space: nowrap; }
+.marquee-inner { display: inline-flex; gap: 2.5rem; animation: marquee 20s linear infinite; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-item { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: .1em; color: var(--black); }
+.dot { font-size: .4rem; vertical-align: middle; opacity: .4; }
+
+/* STATS */
+.stats { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--border); }
+.stat { padding: 3rem 2.5rem; border-right: 1px solid var(--border); transition: background .3s; }
+.stat:last-child { border-right: none; }
+.stat:hover { background: rgba(255,92,0,.05); }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.8rem; color: var(--orange); line-height: 1; margin-bottom: .4rem; }
+.stat-label { font-size: .8rem; opacity: .5; font-family: 'Space Mono', monospace; letter-spacing: .05em; text-transform: uppercase; }
+
+/* SECTION UTILS */
+.section-label { font-family: 'Space Mono', monospace; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--orange); margin-bottom: .8rem; display: flex; align-items: center; gap: .8rem; }
+.section-label::after { content: ''; flex: 1; max-width: 80px; height: 1px; background: rgba(255,255,255,.1); }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 4.5vw, 4.5rem); line-height: 1; letter-spacing: .02em; }
+
+/* PROGRAMS */
+.programs { padding: 7rem 4rem; }
+.programs-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; }
+.programs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px; background: var(--border); }
+.program-card { background: var(--black); padding: 2.5rem; position: relative; overflow: hidden; transition: background .3s; min-height: 260px; display: flex; flex-direction: column; justify-content: space-between; }
+.program-card::after { content: ''; position: absolute; bottom: 0; left: 0; height: 3px; width: 0; background: var(--orange); transition: width .4s ease; }
+.program-card:hover { background: #0e0e0e; }
+.program-card:hover::after { width: 100%; }
+.program-icon { font-size: 2.2rem; margin-bottom: 1.2rem; display: block; }
+.program-num { font-family: 'Bebas Neue', sans-serif; font-size: 4.5rem; color: rgba(255,255,255,.04); position: absolute; top: .8rem; right: 1.2rem; line-height: 1; }
+.program-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.55rem; letter-spacing: .04em; margin-bottom: .6rem; }
+.program-desc { font-size: .85rem; line-height: 1.65; opacity: .55; font-weight: 300; }
+.program-tag { display: inline-block; margin-top: 1.2rem; font-family: 'Space Mono', monospace; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--orange); padding: .25rem .65rem; border: 1px solid rgba(255,92,0,.3); }
+
+/* GALLERY */
+.gallery { padding: 7rem 4rem; background: var(--gray); }
+.gallery-header { margin-bottom: 3rem; }
+.gallery-grid { display: grid; grid-template-columns: repeat(4,1fr); grid-template-rows: auto auto; gap: 6px; }
+.gallery-item { position: relative; overflow: hidden; background: var(--gray2); }
+.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.gallery-item:nth-child(4) { grid-column: span 2; }
+.gallery-inner { width: 100%; height: 100%; min-height: 220px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: .8rem; transition: transform .5s ease; position: relative; overflow: hidden; }
+.gallery-item:hover .gallery-inner { transform: scale(1.04); }
+.gallery-bg { position: absolute; inset: 0; }
+.gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.8) 0%, transparent 60%); opacity: 0; transition: opacity .3s; }
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-caption { position: absolute; bottom: 1rem; left: 1.2rem; z-index: 2; transform: translateY(10px); opacity: 0; transition: all .3s; }
+.gallery-item:hover .gallery-caption { transform: translateY(0); opacity: 1; }
+.gallery-caption-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: .06em; }
+.gallery-caption-sub { font-size: .72rem; opacity: .7; font-family: 'Space Mono', monospace; }
+
+/* Gallery placeholder visuals */
+.gal-1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%); }
+.gal-2 { background: linear-gradient(135deg, #1a0a00 0%, #3d1500 50%, #ff5c00 100%); }
+.gal-3 { background: linear-gradient(135deg, #000d1a 0%, #001f3f 50%, #0033ff 100%); }
+.gal-4 { background: linear-gradient(135deg, #0a1a00 0%, #1a3d00 50%, #2d6a00 100%); }
+.gal-5 { background: linear-gradient(135deg, #1a1500 0%, #3d3000 50%, #ffd000 100%); }
+.gal-6 { background: linear-gradient(135deg, #1a001a 0%, #3d003d 50%, #800080 100%); }
+
+.gal-icon { font-size: 3.5rem; position: relative; z-index: 1; }
+.gal-label { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: .1em; opacity: .6; position: relative; z-index: 1; }
+.gal-note { font-family: 'Space Mono', monospace; font-size: .6rem; color: var(--orange); opacity: .8; letter-spacing: .12em; text-transform: uppercase; position: relative; z-index: 1; margin-top: .3rem; }
+
+.photo-grid { display: grid; gap: 8px; }
+.photo-grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+.photo-grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); }
+.photo-grid.cols-4 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+.photo-grid img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+  transition: transform .4s ease, filter .4s ease;
+  filter: brightness(.92);
+}
+.photo-grid img:hover { transform: scale(1.03); filter: brightness(1.05); }
+/* TESTIMONIALS */
+.testimonials { padding: 7rem 4rem; overflow: hidden; }
+.testimonials-header { margin-bottom: 4rem; }
+.testimonials-track { display: flex; gap: 2rem; transition: transform .6s cubic-bezier(.16,1,.3,1); }
+.testimonial-card { min-width: 380px; background: var(--gray2); border: 1px solid var(--border); padding: 2.5rem; position: relative; flex-shrink: 0; transition: border-color .3s, transform .3s; }
+.testimonial-card:hover { border-color: rgba(255,92,0,.3); transform: translateY(-4px); }
+.testimonial-card::before { content: '"'; font-family: 'Bebas Neue', sans-serif; font-size: 6rem; color: var(--orange); opacity: .15; position: absolute; top: -.5rem; left: 1.5rem; line-height: 1; }
+.testimonial-text { font-size: .95rem; line-height: 1.75; opacity: .75; font-weight: 300; font-style: italic; margin-bottom: 2rem; position: relative; z-index: 1; }
+.testimonial-author { display: flex; align-items: center; gap: 1rem; }
+.author-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+.author-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .06em; }
+.author-role { font-size: .72rem; opacity: .5; font-family: 'Space Mono', monospace; }
+.testimonial-controls { display: flex; gap: 1rem; margin-top: 3rem; }
+.t-btn { width: 48px; height: 48px; border: 1px solid rgba(255,255,255,.15); background: transparent; color: var(--white); font-size: 1.1rem; cursor: none; transition: all .2s; display: flex; align-items: center; justify-content: center; }
+.t-btn:hover { background: var(--orange); border-color: var(--orange); color: var(--black); }
+
+/* EVENTS */
+.events { padding: 7rem 4rem; background: var(--gray); }
+.events-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; }
+.events-list { display: flex; flex-direction: column; gap: 1.5px; background: var(--border); }
+.event-item { background: var(--gray); display: grid; grid-template-columns: 120px 1fr auto; align-items: center; gap: 3rem; padding: 2rem 2.5rem; transition: background .3s, transform .2s; }
+.event-item:hover { background: #161616; transform: translateX(6px); }
+.event-date { text-align: center; }
+.event-month { font-family: 'Space Mono', monospace; font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--orange); }
+.event-day { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; line-height: 1; }
+.event-year { font-size: .7rem; opacity: .4; font-family: 'Space Mono', monospace; }
+.event-divider { width: 1px; height: 60px; background: var(--border); }
+.event-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .04em; margin-bottom: .4rem; }
+.event-meta { font-size: .8rem; opacity: .5; font-family: 'Space Mono', monospace; }
+.event-badge { font-family: 'Space Mono', monospace; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; padding: .3rem .8rem; border: 1px solid; }
+.badge-free { color: #00d084; border-color: rgba(0,208,132,.3); }
+.badge-reg { color: var(--yellow); border-color: rgba(255,208,0,.3); }
+
+/* MISSION */
+.mission { padding: 7rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; position: relative; overflow: hidden; }
+.mission::before { content: 'STEM'; font-family: 'Bebas Neue', sans-serif; font-size: 22rem; color: rgba(255,255,255,.018); position: absolute; left: -1rem; top: 50%; transform: translateY(-50%); pointer-events: none; line-height: 1; }
+.mission-text { position: relative; z-index: 1; }
+.mission-body { font-size: 1rem; line-height: 1.8; opacity: .65; font-weight: 300; margin-top: 1.2rem; }
+.mission-highlight { font-size: 1.2rem; font-weight: 500; line-height: 1.55; color: var(--white); margin: 2rem 0; padding-left: 1.3rem; border-left: 3px solid var(--orange); opacity: 1; }
+.founders { display: flex; flex-direction: column; gap: 1.2rem; position: relative; z-index: 1; }
+.founder-card { background: rgba(255,255,255,.03); border: 1px solid var(--border); padding: 1.8rem; position: relative; transition: border-color .3s, transform .3s; }
+.founder-card:hover { border-color: rgba(255,92,0,.35); transform: translateX(6px); }
+.founder-role { font-family: 'Space Mono', monospace; font-size: .62rem; letter-spacing: .15em; text-transform: uppercase; color: var(--orange); margin-bottom: .4rem; }
+.founder-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: .04em; }
+.founder-desc { font-size: .83rem; opacity: .5; margin-top: .4rem; line-height: 1.6; font-weight: 300; }
+.founder-badge { position: absolute; top: 1.3rem; right: 1.3rem; font-size: 1.4rem; }
+
+/* VOLUNTEER */
+.volunteer { padding: 7rem 4rem; background: var(--gray2); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+.volunteer-roles { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+.vol-role { display: flex; justify-content: space-between; align-items: center; padding: 1.3rem 1.5rem; border: 1px solid var(--border); transition: all .3s; cursor: none; }
+.vol-role:hover { border-color: var(--orange); background: rgba(255,92,0,.05); }
+.vol-role-left { display: flex; align-items: center; gap: 1rem; }
+.vol-icon { font-size: 1.5rem; }
+.vol-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: .04em; }
+.vol-desc { font-size: .78rem; opacity: .5; font-family: 'Space Mono', monospace; }
+.vol-arrow { color: var(--orange); font-size: 1.1rem; transition: transform .3s; }
+.vol-role:hover .vol-arrow { transform: translateX(4px); }
+.volunteer-form-area { }
+.vol-form-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; }
+.form-group { margin-bottom: 1rem; }
+.form-label { font-family: 'Space Mono', monospace; font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; opacity: .5; margin-bottom: .4rem; display: block; }
+.form-input { width: 100%; background: rgba(255,255,255,.04); border: 1px solid var(--border); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: .9rem; padding: .8rem 1rem; outline: none; transition: border-color .2s; }
+.form-input::placeholder { opacity: .35; }
+.form-input:focus { border-color: var(--orange); }
+.form-select { width: 100%; background: rgba(255,255,255,.04); border: 1px solid var(--border); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: .9rem; padding: .8rem 1rem; outline: none; appearance: none; cursor: none; }
+.form-select option { background: var(--gray); }
+.form-submit { width: 100%; background: var(--orange); color: var(--black); font-family: 'Space Mono', monospace; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 1rem; border: none; cursor: none; transition: background .2s, transform .2s; margin-top: .5rem; }
+.form-submit:hover { background: var(--yellow); transform: translateY(-2px); }
+
+/* CTA BAND */
+.cta-band { padding: 7rem 4rem; background: var(--orange); text-align: center; }
+.cta-band .section-title { color: var(--black); font-size: clamp(2.5rem, 6vw, 6rem); }
+.cta-band .section-label { justify-content: center; color: var(--black); opacity: .6; }
+.cta-band .section-label::after { background: rgba(0,0,0,.2); }
+.cta-sub { font-size: 1rem; color: var(--black); opacity: .7; margin: 1.2rem auto 2.5rem; max-width: 450px; font-weight: 300; }
+.btn-dark { background: var(--black); color: var(--white); font-family: 'Space Mono', monospace; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 1rem 2.5rem; text-decoration: none; display: inline-block; transition: background .2s; clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px)); }
+.btn-dark:hover { background: #222; }
+
+/* DONATE */
+.donate { padding: 7rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+.donate-quote { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 3.5vw, 3.5rem); line-height: 1.05; margin-bottom: 1.5rem; }
+.donate-quote .hi { color: var(--orange); }
+.donate-note { font-size: .85rem; opacity: .45; line-height: 1.7; font-weight: 300; }
+.donate-amounts { display: grid; grid-template-columns: repeat(3,1fr); gap: .8rem; margin: 1.5rem 0; }
+.amount-btn { border: 1px solid rgba(255,255,255,.15); background: transparent; color: var(--white); font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; padding: .9rem; cursor: none; transition: all .2s; }
+.amount-btn:hover, .amount-btn.active { background: var(--orange); border-color: var(--orange); color: var(--black); }
+.form-row { display: flex; gap: .8rem; margin-bottom: .8rem; }
+.donate-submit { width: 100%; background: var(--orange); color: var(--black); font-family: 'Space Mono', monospace; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 1rem; border: none; cursor: none; transition: background .2s, transform .2s; margin-top: .5rem; }
+.donate-submit:hover { background: var(--yellow); transform: translateY(-2px); }
+
+/* CONTACT */
+.contact { padding: 7rem 4rem; background: var(--gray); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
+.contact-info { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+.contact-item { display: flex; gap: 1.2rem; align-items: flex-start; }
+.contact-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: .1rem; }
+.contact-label { font-family: 'Space Mono', monospace; font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--orange); margin-bottom: .3rem; }
+.contact-val { font-size: .95rem; opacity: .75; line-height: 1.6; font-weight: 300; }
+.contact-form-wrap { }
+.contact-form-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; }
+
+/* FOOTER */
+footer { background: var(--black); border-top: 1px solid var(--border); padding: 4rem; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: .08em; }
+.footer-logo span { color: var(--orange); }
+.footer-tagline { font-size: .82rem; opacity: .4; margin-top: .4rem; font-weight: 300; max-width: 220px; line-height: 1.6; }
+.footer-cols { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+.footer-col-title { font-family: 'Space Mono', monospace; font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.2rem; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+.footer-col a { color: var(--white); text-decoration: none; font-size: .85rem; opacity: .45; transition: opacity .2s, color .2s; }
+.footer-col a:hover { opacity: 1; color: var(--orange); }
+.footer-bottom { border-top: 1px solid var(--border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-size: .75rem; opacity: .35; font-family: 'Space Mono', monospace; }
+.social-links { display: flex; gap: 1rem; }
+.social-link { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: .9rem; transition: border-color .2s, background .2s; }
+.social-link:hover { border-color: var(--orange); background: rgba(255,92,0,.1); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { padding: 0 1.5rem 4rem; }
+  .stats { grid-template-columns: repeat(2,1fr); }
+  .programs, .gallery, .testimonials, .events, .mission, .volunteer, .donate, .contact { padding: 5rem 1.5rem; }
+  .programs-grid, .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item:nth-child(1) { grid-column: span 1; grid-row: span 1; }
+  .gallery-item:nth-child(4) { grid-column: span 1; }
+  .mission, .volunteer, .donate, .contact { grid-template-columns: 1fr; gap: 3rem; }
+  .events-header, .programs-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .event-item { grid-template-columns: 80px 1fr; gap: 1.5rem; }
+  .event-divider { display: none; }
+  footer { padding: 3rem 1.5rem; }
+  .footer-top { flex-direction: column; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">STEM<span>2</span>SUCCESS</a>
+  <ul class="nav-links">
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#mission">About</a></li>
+    <li><a href="#volunteer">Volunteer</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#donate" class="nav-cta">Donate</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-tag"><!--Est. 2025 · -->Houston, TX · Nonprofit 501(c)(3)</div>
+  <h1 class="hero-headline">
+    UNLOCKING<br>
+    <span class="acc">STEM</span><br>
+    <span class="str">FOR EVERY</span><br>
+    KID.
+  </h1>
+  <div class="hero-sub">
+    <p class="hero-desc">Free Tutoring. Mentorship. Scholarships. Workshops. We give underrepresented students the tools to thrive in Chess, Math, science, technology, and engineering</p>
+    <div class="hero-btns">
+      <a href="#programs" class="btn-primary">Explore Programs</a>
+      <a href="#donate" class="btn-ghost">Support Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">Tutoring</span><span class="dot">●</span>
+    <span class="marquee-item">Mentorship</span><span class="dot">●</span>
+    <span class="marquee-item">Scholarships</span><span class="dot">●</span>
+    <span class="marquee-item">Workshops</span><span class="dot">●</span>
+    <span class="marquee-item">Chess & STEM Education</span><span class="dot">●</span>
+    <span class="marquee-item">Community</span><span class="dot">●</span>
+    <span class="marquee-item">Innovation</span><span class="dot">●</span>
+    <span class="marquee-item">Opportunity</span><span class="dot">●</span>
+    <span class="marquee-item">Tutoring</span><span class="dot">●</span>
+    <span class="marquee-item">Mentorship</span><span class="dot">●</span>
+    <span class="marquee-item">Scholarships</span><span class="dot">●</span>
+    <span class="marquee-item">Workshops</span><span class="dot">●</span>
+    <span class="marquee-item">Chess & STEM Education</span><span class="dot">●</span>
+    <span class="marquee-item">Community</span><span class="dot">●</span>
+    <span class="marquee-item">Innovation</span><span class="dot">●</span>
+    <span class="marquee-item">Opportunity</span><span class="dot">●</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats reveal">
+  <div class="stat"><div class="stat-num">100+</div><div class="stat-label">Students Served</div></div>
+  <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Mentors & Educators</div></div>
+  <!--div class="stat"><div class="stat-num">coming</div><div class="stat-label">Scholarships Awarded</div></div-->
+  <div class="stat"><div class="stat-num">4</div><div class="stat-label">Partner Schools</div></div>
+</div>
+
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+  <div class="programs-header reveal">
+    <div><div class="section-label">What We Do</div><h2 class="section-title">OUR PROGRAMS</h2></div>
+    <a href="#volunteer" class="btn-ghost">Get Involved →</a>
+  </div>
+  <div class="programs-grid reveal">
+    <div class="program-card"><span class="program-icon">♟️</span><span class="program-num">01</span><div><div class="program-title">Chess</div><p class="program-desc">Personalized academic support in math, science, coding, and engineering — matched to each student's pace and learning style.</p><span class="program-tag">K–12 Students</span></div></div>
+    <div class="program-card"><span class="program-icon">🧑‍💻</span><span class="program-num">02</span><div><div class="program-title">One-on-One Tutoring</div><p class="program-desc">Personalized academic support in math, science, coding, and engineering — matched to each student's pace and learning style.</p><span class="program-tag">K–12 Students</span></div></div>
+    <div class="program-card"><span class="program-icon">🚀</span><span class="program-num">03</span><div><div class="program-title">Mentorship Network</div><p class="program-desc">Students paired with STEM professionals guiding them through career exploration, college prep, and life skills development.</p><span class="program-tag">Career Pathways</span></div></div>
+    <div class="program-card"><span class="program-icon">🏆</span><span class="program-num">04</span><div><div class="program-title">Scholarship Fund</div><p class="program-desc">Need-based scholarships to high-achieving students pursuing STEM degrees, removing financial barriers to higher education.</p><span class="program-tag">Higher Education</span></div></div>
+    <div class="program-card"><span class="program-icon">🔬</span><span class="program-num">05</span><div><div class="program-title">STEM Workshops</div><p class="program-desc">Hands-on workshops covering robotics, coding bootcamps, science experiments, and engineering challenges that spark curiosity.</p><span class="program-tag">Hands-On Learning</span></div></div>
+    <div class="program-card"><span class="program-icon">👩‍🔬</span><span class="program-num">06</span><div><div class="program-title">Girls in STEM</div><p class="program-desc">Dedicated programming to inspire and support young women in science and technology, breaking barriers in underrepresented fields.</p><span class="program-tag">Equity & Inclusion</span></div></div>
+    <div class="program-card"><span class="program-icon">🌐</span><span class="program-num">07</span><div><div class="program-title">Community Outreach</div><p class="program-desc">Partnering with schools and community centers to bring STEM resources directly to underserved neighborhoods, schools  across world.</p><span class="program-tag">Community Impact</span></div></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-header reveal">
+    <div class="section-label">In Action</div>
+    <h2 class="section-title">MOMENTS THAT MATTER</h2>
+    <p style="opacity:.5;font-size:.9rem;margin-top:.8rem;font-weight:300;">Real students. Real breakthroughs. <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:.75rem;">
+	<!-- SECTION 1: StemToSuccess Club -->
+  <div class="gallery-section reveal">
+    <div class="gallery-section-header">
+      <div class="section-label">2021 to  present</div>
+      <h2>StemToSuccess Club — <span>In-Person & Virtual</span></h2>
+      <p class="sub">Community chess & STEM education programs serving Houston and students worldwide through in-person sessions and virtual learning.</p>
+    </div>
+    <div class="photo-grid cols-3">
+      <img src="images/stemtosuccess/stemtosucess23.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess6.JPEG"  alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess17.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess13.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess8.JPEG"  alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess14.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess18.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess7.JPEG"  alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess2.JPEG"  alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess10.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess26.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess11.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess15.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess5.JPEG"  alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess29.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess20.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess4.JPEG"  alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess19.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess28.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess21.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess12.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess25.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess30.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess.JPEG"   alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess9.JPEG"  alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess16.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess27.JPEG" alt="StemToSuccess Club" loading="lazy"/>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Global Guru -->
+  <div class="gallery-section reveal">
+    <div class="gallery-section-header">
+      <div class="section-label">2020 to present · Online Worldwide</div>
+      <h2>Global Guru Online Chess <span>BootCamp</span></h2>
+      <p class="sub">Annual summer chess bootcamp held June–July, taught virtually through globalguru.online — reaching students internationally since 2020.</p>
+    </div>
+    <img src="images/stemtosuccess/ronakglobalguru.png" alt="Ronak Hiwale - Global Guru Chess Instructor" class="spotlight"/>
+    <p style="text-align:center;font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.15em;color:var(--orange);opacity:.8;margin-bottom:2rem;">Chess Instructor Spotlight · Ronak Hiwale at globalguru.online (2020)</p>
+    <div class="photo-grid cols-3">
+      <img src="images/stemtosuccess/globalguru.JPEG"  alt="Global Guru BootCamp" loading="lazy"/>
+      <img src="images/stemtosuccess/globalguru2.JPEG" alt="Global Guru BootCamp" loading="lazy"/>
+      <img src="images/stemtosuccess/globalguru4.JPEG" alt="Global Guru BootCamp" loading="lazy"/>
+      <img src="images/stemtosuccess/globalguru1.JPEG" alt="Global Guru BootCamp" loading="lazy"/>
+      <img src="images/stemtosuccess/globalguru3.JPEG" alt="Global Guru BootCamp" loading="lazy"/>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Houston Public Library -->
+  <div class="gallery-section reveal">
+    <div class="gallery-section-header">
+      <div class="section-label">2023 to present · Free Community Program</div>
+      <h2>ChessCamp at Houston <span>Public Library</span></h2>
+      <p class="sub">Free chess education for Houston youth at HPL branches — part of our nonprofit mission to bring quality learning to every neighborhood.</p>
+    </div>
+    <div class="photo-grid cols-2">
+      <img src="images/stemtosuccess/chesslib1.JPEG" alt="Houston Public Library ChessCamp" loading="lazy"/>
+      <img src="images/stemtosuccess/chesslib2.JPEG" alt="Houston Public Library ChessCamp" loading="lazy"/>
+      <img src="images/stemtosuccess/chesslib3.JPEG" alt="Houston Public Library ChessCamp" loading="lazy"/>
+      <img src="images/stemtosuccess/chesslib4.JPEG" alt="Houston Public Library ChessCamp" loading="lazy"/>
+    </div>
+  </div>
+
+  <!-- SECTION 4: West U Recreation Center -->
+  <div class="gallery-section reveal">
+    <div class="gallery-section-header">
+      <div class="section-label">Summer Coaching · West University Place</div>
+      <h2>Summer Chess Coach at <span>West U Recreation Center</span></h2>
+      <p class="sub">Delivering in-person summer chess coaching at West University Place Recreation Center — building skills and community one move at a time.</p>
+    </div>
+    <div class="photo-grid cols-2">
+      <img src="images/stemtosuccess/stemtosucess27.JPEG" alt="West U Recreation Center" loading="lazy"/>
+      <img src="images/stemtosuccess/stemtosucess16.JPEG" alt="West U Recreation Center" loading="lazy"/>
+    </div>
+  </div>
+
+</div>
+<!-- END GALLERY --></span></p>
+  </div>
+  <div class="gallery-grid reveal">
+    <!--div class="gallery-item">
+      <div class="gallery-inner gal-1">
+        <div class="gallery-bg gal-1"></div>
+        <span class="gal-icon">🔭</span>
+        <span class="gal-label">Science Workshop</span>
+        <span class="gal-note">Add your photo here</span>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-caption"><div class="gallery-caption-title">Workshop Day</div><div class="gallery-caption-sub">Houston, TX · 2025</div></div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-inner gal-2" style="min-height:180px;">
+        <div class="gallery-bg gal-2"></div>
+        <span class="gal-icon">💻</span>
+        <span class="gal-label">Coding Bootcamp</span>
+        <span class="gal-note">Photos comming</span>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-caption"><div class="gallery-caption-title">Code Camp</div><div class="gallery-caption-sub">Summer 2025</div></div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-inner gal-3" style="min-height:180px;">
+        <div class="gallery-bg gal-3"></div>
+        <span class="gal-icon">🤖</span>
+        <span class="gal-label">Robotics Challenge</span>
+        <span class="gal-note">Photos comming</span>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-caption"><div class="gallery-caption-title">Robotics Club</div><div class="gallery-caption-sub">Spring 2025</div></div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-inner gal-4" style="min-height:180px;">
+        <div class="gallery-bg gal-4"></div>
+        <span class="gal-icon">🏅</span>
+        <span class="gal-label">Scholarship Ceremony</span>
+        <span class="gal-note">Photos comming</span>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-caption"><div class="gallery-caption-title">Awards Night</div><div class="gallery-caption-sub">Class of 2025</div></div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-inner gal-5" style="min-height:200px;">
+        <div class="gallery-bg gal-5"></div>
+        <span class="gal-icon">👩‍🏫</span>
+        <span class="gal-label">Mentorship Session</span>
+        <span class="gal-note">Photos comming</span>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-caption"><div class="gallery-caption-title">Mentor Match</div><div class="gallery-caption-sub">Weekly Sessions</div></div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-inner gal-6" style="min-height:200px;">
+        <div class="gallery-bg gal-6"></div>
+        <span class="gal-icon">🌟</span>
+        <span class="gal-label">Community Outreach</span>
+        <span class="gal-note">Photos comming</span>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-caption"><div class="gallery-caption-title">Community Day</div><div class="gallery-caption-sub">Houston Schools</div></div>
+      </div>
+    </div-->
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<!--section class="testimonials" id="testimonials">
+  <div class="testimonials-header reveal">
+    <div class="section-label">What They Say</div>
+    <h2 class="section-title">VOICES OF IMPACT</h2>
+  </div>
+  <div style="overflow:hidden;" class="reveal">
+    <div class="testimonials-track" id="tTrack">
+      <div class="testimonial-card">
+        <p class="testimonial-text">Before STEM to Success, I didn't think college was possible for me. My mentor helped me apply, and I got a full scholarship to study computer science. This organization changed my entire life.</p>
+        <div class="testimonial-author"><div class="author-avatar" style="background:rgba(255,92,0,.15);">🎓</div><div><div class="author-name">Marcus T.</div><div class="author-role">Scholarship Recipient · Class of 2025</div></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">The robotics workshop was the most fun I've ever had learning. I didn't even realize I was doing engineering. Now I want to build robots for real when I grow up!</p>
+        <div class="testimonial-author"><div class="author-avatar" style="background:rgba(0,51,255,.15);">🤖</div><div><div class="author-name">Aaliyah R.</div><div class="author-role">Workshop Student · Age 13</div></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">As a mentor, I get as much out of this program as the students do. Watching a kid go from struggling in math to acing their exams is something no salary can buy. I'm so proud to be part of this.</p>
+        <div class="testimonial-author"><div class="author-avatar" style="background:rgba(255,208,0,.15);">👩‍💻</div><div><div class="author-name">Dr. Priya N.</div><div class="author-role">STEM Mentor · Software Engineer</div></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">My daughter was shy and afraid of math. After joining the Girls in STEM program, she comes home every week excited about what she learned. The confidence boost has been incredible.</p>
+        <div class="testimonial-author"><div class="author-avatar" style="background:rgba(0,208,132,.15);">👨‍👧</div><div><div class="author-name">James & Keisha M.</div><div class="author-role">Parents of Program Participant</div></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">We partnered with STEM to Success to bring workshops to our school, and the impact on our students has been remarkable. The team is dedicated, professional, and genuinely passionate about these kids.</p>
+        <div class="testimonial-author"><div class="author-avatar" style="background:rgba(128,0,128,.15);">🏫</div><div><div class="author-name">Principal Williams</div><div class="author-role">Partner School · Houston ISD</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="testimonial-controls reveal">
+    <button class="t-btn" id="tPrev">←</button>
+    <button class="t-btn" id="tNext">→</button>
+  </div>
+</section-->
+
+<!-- EVENTS -->
+<!--section class="events" id="events">
+  <div class="events-header reveal">
+    <div><div class="section-label">What's Coming</div><h2 class="section-title">UPCOMING EVENTS</h2></div>
+    <a href="#contact" class="btn-ghost">RSVP Now →</a>
+  </div>
+  <div class="events-list reveal">
+    <div class="event-item">
+      <div class="event-date"><div class="event-month">APR</div><div class="event-day">12</div><div class="event-year">2025</div></div>
+      <div class="event-divider"></div>
+      <div><div class="event-title">Spring Coding Bootcamp Kickoff</div><div class="event-meta">📍 Houston Public Library · 10:00 AM – 3:00 PM</div></div>
+      <span class="event-badge badge-free">Free</span>
+    </div>
+    <div class="event-item">
+      <div class="event-date"><div class="event-month">MAY</div><div class="event-day">03</div><div class="event-year">2025</div></div>
+      <div class="event-divider"></div>
+      <div><div class="event-title">Girls in STEM Networking Mixer</div><div class="event-meta">📍 Rice University Campus · 5:00 PM – 8:00 PM</div></div>
+      <span class="event-badge badge-free">Free</span>
+    </div>
+    <div class="event-item">
+      <div class="event-date"><div class="event-month">MAY</div><div class="event-day">17</div><div class="event-year">2025</div></div>
+      <div class="event-divider"></div>
+      <div><div class="event-title">Annual Scholarship Gala & Fundraiser</div><div class="event-meta">📍 Houston Museum of Natural Science · 6:00 PM – 10:00 PM</div></div>
+      <span class="event-badge badge-reg">Register</span>
+    </div>
+    <div class="event-item">
+      <div class="event-date"><div class="event-month">JUN</div><div class="event-day">07</div><div class="event-year">2025</div></div>
+      <div class="event-divider"></div>
+      <div><div class="event-title">Robotics Summer Camp — Session 1</div><div class="event-meta">📍 Discovery Green · 9:00 AM – 4:00 PM (5 Days)</div></div>
+      <span class="event-badge badge-reg">Register</span>
+    </div>
+    <div class="event-item">
+      <div class="event-date"><div class="event-month">JUL</div><div class="event-day">19</div><div class="event-year">2025</div></div>
+      <div class="event-divider"></div>
+      <div><div class="event-title">Community STEM Fair & Expo</div><div class="event-meta">📍 NRG Center, Houston · 11:00 AM – 6:00 PM</div></div>
+      <span class="event-badge badge-free">Free</span>
+    </div>
+  </div>
+</section-->
+
+<!-- MISSION / ABOUT -->
+<section class="mission" id="mission">
+  <div class="mission-text reveal">
+    <div class="section-label">Who We Are</div>
+    <h2 class="section-title">BUILT BY BELIEVERS, FOR ACHIEVERS</h2>
+    <p class="mission-highlight">Every child deserves access to the future that STEM can unlock — regardless of zip code or income.</p>
+    <p class="mission-body">STEM to Success was founded with a simple belief: talent is everywhere, but opportunity is not. We're here to change that — one student, one mentor, one breakthrough at a time.</p>
+    <br>
+    <p class="mission-body">As a registered nonprofit, 100% of your donations go directly toward student programs, scholarships, and resources that create measurable difference in young lives across Houston and beyond.</p>
+    <br>
+    <a href="#donate" class="btn-primary">Support Our Mission</a>
+  </div>
+  <div class="founders reveal">
+    <div class="founder-card">
+      <div class="founder-role">Founder & Executive Director</div>
+      <div class="founder-name">The Founder</div>
+      <p class="founder-desc">A passionate advocate for educational equity, leading STEM to Success with vision, drive, and deep community roots in Houston.</p>
+      <span class="founder-badge">🌟</span>
+    </div>
+    <div class="founder-card">
+      <div class="founder-role">Co-Founder & Operations</div>
+      <div class="founder-name">The Sister</div>
+      <p class="founder-desc">Co-building the foundation from day one, bringing structure, heart, and relentless energy to every program we run.</p>
+      <span class="founder-badge">💡</span>
+    </div>
+    <div class="founder-card" style="background:rgba(255,92,0,.06);border-color:rgba(255,92,0,.2);">
+      <div class="founder-role">Our Promise</div>
+      <div class="founder-name" style="font-size:1.25rem;line-height:1.35;">No student is left behind because of what they can't afford.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEER -->
+<section class="volunteer" id="volunteer">
+  <div class="reveal">
+    <div class="section-label">Get Involved</div>
+    <h2 class="section-title">VOLUNTEER WITH US</h2>
+    <p style="opacity:.55;font-size:.95rem;line-height:1.75;font-weight:300;margin-top:1rem;">You don't need to be a teacher to make a difference. We need tutors, mentors, event volunteers, and professionals willing to share their story.</p>
+    <div class="volunteer-roles">
+      <div class="vol-role"><div class="vol-role-left"><span class="vol-icon">📚</span><div><div class="vol-name">Tutor</div><div class="vol-desc">2 hrs/week · Math, Science, Coding</div></div></div><span class="vol-arrow">→</span></div>
+      <div class="vol-role"><div class="vol-role-left"><span class="vol-icon">🧭</span><div><div class="vol-name">Mentor</div><div class="vol-desc">4 hrs/month · Career Guidance</div></div></div><span class="vol-arrow">→</span></div>
+      <div class="vol-role"><div class="vol-role-left"><span class="vol-icon">🎤</span><div><div class="vol-name">Guest Speaker</div><div class="vol-desc">One-time · Share Your STEM Story</div></div></div><span class="vol-arrow">→</span></div>
+      <div class="vol-role"><div class="vol-role-left"><span class="vol-icon">🛠️</span><div><div class="vol-name">Event Support</div><div class="vol-desc">Flexible · Workshops & Events</div></div></div><span class="vol-arrow">→</span></div>
+    </div>
+  </div>
+  <div class="volunteer-form-area reveal">
+    <div class="vol-form-title">SIGN UP TO VOLUNTEER</div>
+    <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" placeholder="Your name"></div>
+    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+    <div class="form-group"><label class="form-label">Role of Interest</label>
+      <select class="form-select form-input">
+        <option>Tutor</option>
+        <option>Mentor</option>
+        <option>Guest Speaker</option>
+        <option>Event Support</option>
+        <option>Multiple / Open to Anything</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Tell Us About You</label><textarea class="form-input" rows="4" placeholder="Your background, skills, or why you want to volunteer..." style="resize:vertical;"></textarea></div>
+    <button class="form-submit">Submit Application</button>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="section-label">Make a Difference</div>
+  <h2 class="section-title">THE FUTURE NEEDS YOUR HELP.</h2>
+  <p class="cta-sub">Every dollar funds a tutoring session, a workshop seat, or a scholarship that changes a life forever.</p>
+  <a href="#donate" class="btn-dark">Donate Today</a>
+</section>
+
+<!-- DONATE -->
+<section class="donate" id="donate">
+  <div class="reveal">
+    <div class="donate-quote">GIVE A KID A FUTURE IN <span class="hi">CHESS, SCIENCE, TECH, ENGINEERING & MATH.</span></div>
+    <p class="donate-note">STEM to Success is a registered 501(c)(3) nonprofit. Your contribution is tax-deductible and goes 100% directly to student programs and scholarships.</p>
+  </div>
+  <div class="reveal">
+    <div class="section-label">Support Us</div>
+    <h2 class="section-title" style="margin-bottom:.5rem;">DONATE</h2>
+    <p style="opacity:.45;font-size:.85rem;margin-bottom:.5rem;">Choose an amount or enter your own.</p>
+    <div class="donate-amounts">
+      <button class="amount-btn" onclick="selectAmt(this)">$25</button>
+      <button class="amount-btn active" onclick="selectAmt(this)">$50</button>
+      <button class="amount-btn" onclick="selectAmt(this)">$100</button>
+      <button class="amount-btn" onclick="selectAmt(this)">$250</button>
+      <button class="amount-btn" onclick="selectAmt(this)">$500</button>
+      <button class="amount-btn" onclick="selectAmt(this)">OTHER</button>
+    </div>
+    <div class="form-row"><input type="text" class="form-input" placeholder="First name"><input type="text" class="form-input" placeholder="Last name"></div>
+    <div class="form-row"><input type="email" class="form-input" placeholder="Email address"></div>
+    <div class="form-row"><input type="text" class="form-input" placeholder="Card number"></div>
+    <div class="form-row"><input type="text" class="form-input" placeholder="MM / YY"><input type="text" class="form-input" placeholder="CVC"></div>
+    <button class="donate-submit">Donate Now — Change a Life</button>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <div class="section-label">Reach Out</div>
+    <h2 class="section-title">GET IN TOUCH</h2>
+    <p style="opacity:.55;font-size:.9rem;line-height:1.75;margin-top:1rem;font-weight:300;">Whether you're a student, parent, volunteer, donor, or partner — we'd love to hear from you.</p>
+    <div class="contact-info">
+      <div class="contact-item"><span class="contact-icon">📍</span><div><div class="contact-label">Location</div><div class="contact-val">Houston, Texas <br> Serving the Greater Houston Area in-person & virtual programs worldwide </div></div></div>
+      <div class="contact-item"><span class="contact-icon">📧</span><div><div class="contact-label">Email</div><div class="contact-val">stemtosuccessin@gmail.com</div></div></div>
+      <div class="contact-item"><span class="contact-icon">📱</span><div><div class="contact-label">Phone</div><div class="contact-val">(408) 250-0288</div></div></div>
+      <div class="contact-item"><span class="contact-icon">🕐</span><div><div class="contact-label">Office Hours</div><div class="contact-val">Monday – Friday, 9 AM – 5 PM CST</div></div></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="contact-form-title">SEND US A MESSAGE</div>
+    <div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" placeholder="Your full name"></div>
+    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+    <div class="form-group"><label class="form-label">Subject</label>
+      <select class="form-select form-input">
+        <option>I'm a Student / Parent</option>
+        <option>I Want to Volunteer</option>
+        <option>Partnership Inquiry</option>
+        <option>Donation Question</option>
+        <option>Media / Press</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Message</label><textarea class="form-input" rows="5" placeholder="Tell us how we can help or how you'd like to help us..." style="resize:vertical;"></textarea></div>
+    <button class="form-submit">Send Message</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">STEM<span>2</span>SUCCESS</div>
+      <p class="footer-tagline">Unlocking STEM for every kid in Houston and beyond.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Programs</div>
+        <ul>
+          <li><a href="#programs">Tutoring</a></li>
+          <li><a href="#programs">Mentorship</a></li>
+          <li><a href="#programs">Scholarships</a></li>
+          <li><a href="#programs">Workshops</a></li>
+          <li><a href="#programs">Girls in STEM</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Org</div>
+        <ul>
+          <li><a href="#mission">About Us</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#volunteer">Volunteer</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#donate">Donate</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Follow Us</div>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Twitter / X</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 STEM to Success. All rights reserved. 501(c)(3) Nonprofit. EIN: XX-XXXXXXX</p>
+    <div class="social-links">
+      <a href="#" class="social-link">📸</a>
+      <a href="#" class="social-link">👥</a>
+      <a href="#" class="social-link">🐦</a>
+      <a href="#" class="social-link">💼</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cur = document.getElementById('cursor'), ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+(function anim(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(anim); })();
+document.querySelectorAll('a,button,input,select,textarea,.vol-role').forEach(el => {
+  el.addEventListener('mouseenter',()=>{ cur.style.transform='translate(-50%,-50%) scale(2)'; cur.style.background='#ffd000'; ring.style.width='56px'; ring.style.height='56px'; });
+  el.addEventListener('mouseleave',()=>{ cur.style.transform='translate(-50%,-50%) scale(1)'; cur.style.background='var(--orange)'; ring.style.width='38px'; ring.style.height='38px'; });
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'), i*70); obs.unobserve(e.target); } });
+}, { threshold: .1 });
+document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+// Testimonial slider
+let tIdx = 0;
+const track = document.getElementById('tTrack');
+const cards = track.querySelectorAll('.testimonial-card');
+function slideT(dir) {
+  const visible = Math.floor(track.parentElement.offsetWidth / 400);
+  tIdx = Math.max(0, Math.min(tIdx + dir, cards.length - visible));
+  const w = cards[0].offsetWidth + 32;
+  track.style.transform = `translateX(-${tIdx * w}px)`;
+}
+document.getElementById('tNext').addEventListener('click', () => slideT(1));
+document.getElementById('tPrev').addEventListener('click', () => slideT(-1));
+
+// Donate amounts
+function selectAmt(btn) { document.querySelectorAll('.amount-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
+</script>
+</body>
+</html>
